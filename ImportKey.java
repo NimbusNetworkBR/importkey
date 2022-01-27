@@ -1,4 +1,3 @@
-
 import java.security.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,31 +84,30 @@ public class ImportKey  {
     public static void main ( String args[]) {
         
         // change this if you want another password by default
-        String keypass = "importkey";
+        String keypass = "importkey_password";
         
         // change this if you want another alias by default
-        String defaultalias = "importkey";
+        String defaultalias = "alias";
 
         // change this if you want another keystorefile by default
         String keystorename = System.getProperty("keystore");
 
         if (keystorename == null)
-            keystorename = System.getProperty("user.home")+
-                System.getProperty("file.separator")+
-                "keystore.ImportKey"; // especially this ;-)
-
+            keystorename = "keystore.ImportKey";
 
         // parsing command line input
         String keyfile = "";
         String certfile = "";
-        if (args.length < 2 || args.length>3) {
-            System.out.println("Usage: java comu.ImportKey keyfile certfile [alias]");
+        if (args.length < 2 || args.length>4) {
+            System.out.println("Usage: java comu.ImportKey keyfile certfile [alias] [password]");
             System.exit(0);
         } else {
             keyfile = args[0];
             certfile = args[1];
             if (args.length>2)
                 defaultalias = args[2];
+            if (args.length>3)
+                keypass = args[3];
         }
 
         try {
